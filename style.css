@@ -1,0 +1,215 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #0a0a0a;
+    color: #e0e0e0;
+    overflow-x: hidden;
+}
+.glass-effect {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: radial-gradient(circle at 25% 30%, rgba(0, 122, 255, 0.2), transparent 40%),
+                      radial-gradient(circle at 75% 70%, rgba(34, 197, 94, 0.2), transparent 40%);
+    animation: pulse 15s infinite ease-in-out;
+    z-index: -1;
+}
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.1); opacity: 1; }
+}
+.section-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.section-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.skill-card:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 122, 255, 0.4);
+}
+.project-card:hover {
+     border-color: rgba(0, 122, 255, 0.7);
+}
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 18px;
+    height: 100%;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.1);
+}
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: -12px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #007aff;
+    border: 2px solid #0a0a0a;
+    transform: translateX(11px);
+}
+
+#modal-backdrop {
+    transition: opacity 0.3s ease-in-out;
+}
+#project-modal {
+     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+/* Custom animations for photo effects */
+@keyframes spin-slow {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.animate-spin-slow {
+    animation: spin-slow 8s linear infinite;
+}
+
+/* Photo hover effects */
+.photo-container:hover .photo-glow {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+/* Enhanced photo styling for personal photos */
+.about-photo {
+    object-fit: cover;
+    object-position: center;
+    transition: all 0.5s ease;
+}
+
+.about-photo:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+/* Photo container enhancements */
+.photo-gradient-border {
+    background: linear-gradient(45deg, #007aff, #00d4ff, #007aff);
+    background-size: 200% 200%;
+    animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Floating elements animation */
+.floating-dot {
+    animation: float 2s ease-in-out infinite;
+}
+
+.floating-dot:nth-child(2) {
+    animation-delay: 1s;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Photo glow effect enhancement */
+.photo-glow {
+    background: radial-gradient(circle, rgba(0, 122, 255, 0.3) 0%, transparent 70%);
+    filter: blur(20px);
+    transition: all 0.5s ease;
+}
+/* ===== Global Styles ===== */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #0a0a0a;
+    color: #fff;
+    line-height: 1.6;
+  }
+  
+  /* Glass Effect */
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Hero Background */
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #000000 0%, #111827 100%);
+    z-index: -1;
+  }
+  
+  /* Section Animation */
+  .section-reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .section-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Timeline */
+  .timeline {
+    border-left: 2px solid #007aff;
+    padding-left: 20px;
+    position: relative;
+  }
+  .timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -11px;
+    top: 0.5rem;
+    width: 20px;
+    height: 20px;
+    background: #007aff;
+    border-radius: 50%;
+  }
+  
+  /* Project Modal */
+  #project-modal {
+    display: none;
+  }
+  #project-modal.active {
+    display: flex;
+  }
+  #modal-backdrop {
+    transition: opacity 0.3s ease;
+  }
+  #modal-content {
+    transition: all 0.3s ease;
+  }
+  
+  /* Scrollbar for AI chat */
+  #ai-chat-box {
+    scrollbar-width: thin;
+    scrollbar-color: #007aff #1a1a1a;
+  }
+  #ai-chat-box::-webkit-scrollbar {
+    width: 6px;
+  }
+  #ai-chat-box::-webkit-scrollbar-thumb {
+    background: #007aff;
+    border-radius: 10px;
+  }
+  
