@@ -216,7 +216,9 @@ document.addEventListener("DOMContentLoaded", () => {
         "Used stratified splitting, careful evaluation and confusion matrix analysis.",
         "Achieved ~92% validation accuracy on carefully curated evaluation data."
       ],
-      tech: ["Python", "PyTorch", "Hugging Face", "BERT", "Scikit-learn", "Pandas"]
+      tech: ["Python", "PyTorch", "Hugging Face", "BERT", "Scikit-learn", "Pandas"],
+      github: "https://github.com/shivamyadav039/FakeNewsDetection",
+      live: "https://fakenewsdetection-1-zimg.onrender.com/"
     },
     "school-erp": {
       title: "School ERP Management System",
@@ -228,7 +230,9 @@ document.addEventListener("DOMContentLoaded", () => {
         "Interactive analytics dashboard for insights into student performance.",
         "Responsive UI accessible across devices."
       ],
-      tech: ["Node.js", "Express", "MongoDB", "EJS", "HTML / CSS"]
+      tech: ["Node.js", "Express", "MongoDB", "EJS", "HTML / CSS"],
+      github: "https://github.com/shivamyadav039/school-erp-project039",
+      live: "https://school-erp-project039.vercel.app"
     },
     "face-recognition": {
       title: "Face Recognition Attendance",
@@ -240,7 +244,9 @@ document.addEventListener("DOMContentLoaded", () => {
         "Automatic linking of recognized faces to student IDs and database records.",
         "Exportable attendance reports in Excel/CSV formats."
       ],
-      tech: ["Python", "OpenCV", "Tkinter", "LBPH"]
+      tech: ["Python", "OpenCV", "Tkinter", "LBPH"],
+      github: "https://github.com/shivamyadav039/AttendanceMangemantSystemFRS",
+      live: null
     }
   };
 
@@ -261,6 +267,28 @@ document.addEventListener("DOMContentLoaded", () => {
       const techList = document.getElementById("modal-tech");
       if (techList) {
         techList.innerHTML = data.tech.map(t => `<span class="tag">${t}</span>`).join("");
+      }
+
+      // Update Links
+      const githubLink = document.getElementById("modal-github");
+      const liveLink = document.getElementById("modal-live");
+      
+      if (githubLink) {
+        if (data.github) {
+          githubLink.href = data.github;
+          githubLink.style.display = "flex";
+        } else {
+          githubLink.style.display = "none";
+        }
+      }
+      
+      if (liveLink) {
+        if (data.live) {
+          liveLink.href = data.live;
+          liveLink.style.display = "flex";
+        } else {
+          liveLink.style.display = "none";
+        }
       }
     }
 
@@ -408,16 +436,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const q = question.toLowerCase();
 
     if (q.includes("project") || q.includes("erp")) {
-      return "Shivam has built a School ERP Management System, Fake News Detection using BERT, a Face Recognition Attendance System, and an AI Health Assistant (in progress).";
+      return "Shivam has built a School ERP Management System, Fake News Detection using BERT, a Face Recognition Attendance System, and an AI Health Assistant. He also holds certifications in AI Foundations and Automation.";
     }
     if (q.includes("skill") || q.includes("stack") || q.includes("tech")) {
-      return "Shivam works with Python, C++, Java, C, SQL, TensorFlow, PyTorch, OpenCV, Scikit-learn, LangChain, FastAPI, MongoDB, Node.js, and more.";
+      return "Shivam is proficient in Python, C++, Java, C, HTML5, CSS3, Data Structures & Algorithms (DSA), and frameworks like Django, Node.js, FastAPI, TensorFlow, PyTorch, Keras, and Scikit-learn.";
     }
-    if (q.includes("education") || q.includes("college") || q.includes("university")) {
-      return "Shivam is pursuing B.Tech CSE with specialization in AI & ML at Lovely Professional University, Punjab (expected graduation: 2026).";
+    if (q.includes("education") || q.includes("college") || q.includes("university") || q.includes("who")) {
+      return "Shivam is an AI & Machine Learning student at LPU (graduating 2027) and a Data Analyst at Deccan AI. He specializes in fine-tuning LLMs and building intelligent systems that blend mathematical rigor with scalable AI solutions.";
     }
-    if (q.includes("outlier") || q.includes("job") || q.includes("experience")) {
-      return "Shivam is a Math Trainee at Outlier.ai, solving advanced math and reasoning tasks to help train large language models.";
+    if (q.includes("goal") || q.includes("career") || q.includes("future")) {
+      return "Shivam's career goal is to design robust, ethical AI systems that solve complex real-world problems through mathematical reasoning and automated intelligence, empowering businesses and individuals globally.";
+    }
+    if (q.includes("outlier") || q.includes("job") || q.includes("experience") || q.includes("deccan")) {
+      return "Shivam currently contributes to LLM training at Deccan AI and Outlier.ai. He focuses on data analysis, prompt engineering, and improving model reasoning/robustness through advanced reasoning tasks.";
     }
     if (q.includes("contact") || q.includes("reach")) {
       return "You can contact Shivam at <b>shivamyadav7745@gmail.com</b> or on LinkedIn: <a href='https://www.linkedin.com/in/shivam-yadav39/' target='_blank' class='underline text-sky-400'>linkedin.com/in/shivam-yadav39/</a>.";

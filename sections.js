@@ -348,9 +348,7 @@
             <h3 style="font-size:1.1rem;font-weight:600;color:#fff;">Who I Am</h3>
           </div>
           <p style="color:rgba(255,255,255,0.65);font-size:0.9rem;line-height:1.8;">
-            I'm an <span style="color:#fff;font-weight:600;">AI &amp; ML Engineer</span> in training, specializing in
-            <span style="color:#60a5fa;font-weight:500;">Natural Language Processing</span>, applied machine learning, and
-            backend systems. I enjoy turning complex problems into clean, scalable solutions.
+            I am an AI & Machine Learning student at LPU and a Data Analyst at Deccan AI, specializing in fine-tuning and training large language models. I chose this field because of its potential to solve complex real-world problems through mathematical reasoning and automated intelligence. My career goal is to design robust, ethical AI systems that empower businesses and individuals globally.
           </p>
         </div>
         <div class="overlay-card">
@@ -367,21 +365,33 @@
           </p>
           <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.07);">
             <p style="font-size:0.75rem;color:rgba(255,255,255,0.35);letter-spacing:0.08em;text-transform:uppercase;">Year</p>
-            <p style="color:#fff;font-weight:600;font-size:1rem;">2022 – 2027</p>
+            <p style="color:#fff;font-weight:600;font-size:1rem;">2023 – 2027</p>
           </div>
         </div>
-        <div class="overlay-card md:col-span-2">
+        <div class="overlay-card">
           <div class="flex items-center gap-3 mb-4">
             <div style="width:2.5rem;height:2.5rem;border-radius:50%;background:rgba(96,165,250,0.15);display:flex;align-items:center;justify-content:center;">
               <svg width="18" height="18" fill="none" stroke="#60a5fa" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6v6l4 2"/></svg>
             </div>
-            <h3 style="font-size:1.1rem;font-weight:600;color:#fff;">Math Trainee — Outlier.ai</h3>
+            <h3 style="font-size:1.1rem;font-weight:600;color:#fff;">Outlier.ai</h3>
           </div>
-          <p style="color:rgba(96,165,250,0.8);font-size:0.8rem;margin-bottom:0.75rem;">Remote · Nov 2024 – Present</p>
-          <ul style="color:rgba(255,255,255,0.65);font-size:0.9rem;line-height:2;list-style-type:none;padding:0;">
-            <li>→ Designing &amp; solving advanced math / reasoning tasks for LLM training.</li>
-            <li>→ Focusing on algebra, probability, logic and structured step-by-step solutions.</li>
-            <li>→ Helping improve model reasoning, robustness and answer quality.</li>
+          <p style="color:rgba(96,165,250,0.8);font-size:0.8rem;margin-bottom:0.75rem;">Math Trainee · Nov 2024 – Present</p>
+          <ul style="color:rgba(255,255,255,0.65);font-size:0.85rem;line-height:1.7;list-style-type:none;padding:0;">
+            <li>→ Designing &amp; solving advanced math tasks for LLM training.</li>
+            <li>→ Focus on algebra, probability, and logic.</li>
+          </ul>
+        </div>
+        <div class="overlay-card">
+          <div class="flex items-center gap-3 mb-4">
+            <div style="width:2.5rem;height:2.5rem;border-radius:50%;background:rgba(52,211,153,0.15);display:flex;align-items:center;justify-content:center;">
+              <svg width="18" height="18" fill="none" stroke="#34d399" stroke-width="2" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+            </div>
+            <h3 style="font-size:1.1rem;font-weight:600;color:#fff;">Deccan AI</h3>
+          </div>
+          <p style="color:rgba(52,211,153,0.8);font-size:0.8rem;margin-bottom:0.75rem;">Data Analyst · March 2026 – Present</p>
+          <ul style="color:rgba(255,255,255,0.65);font-size:0.85rem;line-height:1.7;list-style-type:none;padding:0;">
+            <li>→ Analyzing data for LLM training methodologies.</li>
+            <li>→ Improving model accuracy and performance.</li>
           </ul>
         </div>
       </div>
@@ -398,6 +408,9 @@
         desc: 'Robust pipeline to classify news as real or fake using transformers, achieving ~92% validation accuracy.',
         tags: ['Python', 'PyTorch', 'BERT', 'Hugging Face'],
         icon: '🧠',
+        image: 'assets/fake-news-premium.jpg',
+        github: 'https://github.com/shivamyadav039/FakeNewsDetection',
+        live: 'https://fakenewsdetection-1-zimg.onrender.com/'
       },
       {
         title: 'School ERP Management System',
@@ -405,8 +418,10 @@
         badgeColor: '#34d399',
         desc: 'Web-based ERP for schools handling students, staff, fees, attendance, and analytics with role-based authentication.',
         tags: ['Node.js', 'Express', 'MongoDB', 'EJS'],
-        link: 'https://github.com/shivamyadav039/school-erp-project039',
         icon: '🏫',
+        image: 'assets/erp.png',
+        github: 'https://github.com/shivamyadav039/school-erp-project039',
+        live: 'https://school-erp-project039.vercel.app'
       },
       {
         title: 'Face Recognition Attendance',
@@ -415,6 +430,8 @@
         desc: 'Desktop app to mark attendance in real time using face recognition with OpenCV and Tkinter UI.',
         tags: ['Python', 'OpenCV', 'Tkinter', 'LBPH'],
         icon: '👁️',
+        image: 'assets/attendance-premium.webp',
+        github: 'https://github.com/shivamyadav039/AttendanceMangemantSystemFRS'
       },
     ];
 
@@ -423,17 +440,22 @@
     content.innerHTML = `
       <div class="grid md:grid-cols-3 gap-5">
         ${projects.map(p => `
-          <div class="overlay-card overlay-project-card">
-            <div style="font-size:2.5rem;margin-bottom:1rem;">${p.icon}</div>
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem;gap:0.5rem;flex-wrap:wrap;">
-              <h3 style="font-size:1rem;font-weight:700;color:#fff;flex:1;">${p.title}</h3>
-              <span style="font-size:0.65rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:999px;background:rgba(0,0,0,0.3);border:1px solid ${p.badgeColor}40;color:${p.badgeColor};">${p.badge}</span>
+          <div class="overlay-card overlay-project-card" style="display:flex;flex-direction:column;justify-content:space-between;height:100%;">
+            <div>
+              ${p.image ? `<div style="height:140px;border-radius:0.75rem;overflow:hidden;margin-bottom:1rem;border:1px solid rgba(255,255,255,0.1);"><img src="${p.image}" alt="${p.title}" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/></div>` : `<div style="font-size:2.5rem;margin-bottom:1rem;">${p.icon}</div>`}
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem;gap:0.5rem;flex-wrap:wrap;">
+                <h3 style="font-size:1rem;font-weight:700;color:#fff;flex:1;">${p.title}</h3>
+                <span style="font-size:0.65rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:999px;background:rgba(0,0,0,0.3);border:1px solid ${p.badgeColor}40;color:${p.badgeColor};">${p.badge}</span>
+              </div>
+              <p style="color:rgba(255,255,255,0.55);font-size:0.85rem;line-height:1.7;margin-bottom:1rem;">${p.desc}</p>
+              <div style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1rem;">
+                ${p.tags.map(t => `<span style="font-size:0.7rem;padding:0.2rem 0.55rem;border-radius:999px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);">${t}</span>`).join('')}
+              </div>
             </div>
-            <p style="color:rgba(255,255,255,0.55);font-size:0.85rem;line-height:1.7;margin-bottom:1rem;">${p.desc}</p>
-            <div style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1rem;">
-              ${p.tags.map(t => `<span style="font-size:0.7rem;padding:0.2rem 0.55rem;border-radius:999px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);">${t}</span>`).join('')}
+            <div style="display:flex;align-items:center;gap:0.75rem;margin-top:auto;padding-top:1rem;">
+              ${p.github ? `<a href="${p.github}" target="_blank" style="display:inline-flex;align-items:center;justify-content:center;padding:0.5rem;border-radius:0.5rem;background:rgba(255,255,255,0.05);color:#fff;text-decoration:none;transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'" title="GitHub Code"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>` : ''}
+              ${p.live ? `<a href="${p.live}" target="_blank" style="display:inline-flex;align-items:center;justify-content:center;padding:0.5rem;border-radius:0.5rem;background:rgba(${parseInt(p.badgeColor.slice(1,3),parseInt(p.badgeColor.slice(3,5),16),parseInt(p.badgeColor.slice(5,7),16),0.15)};color:${p.badgeColor};text-decoration:none;transition:all 0.2s;flex:1;font-size:0.8rem;font-weight:600;gap:0.4rem;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='transparent'">Live Demo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>` : ''}
             </div>
-            ${p.link ? `<a href="${p.link}" target="_blank" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.8rem;color:${p.badgeColor};font-weight:600;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity=0.75" onmouseout="this.style.opacity=1">View Repo →</a>` : ''}
           </div>
         `).join('')}
       </div>
@@ -462,40 +484,71 @@
       'MongoDB': { color: '#47A248', bg: 'rgba(71,162,72,0.15)', svg: `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.193 9.555c-1.264-5.58-4.252-7.414-4.573-8.115-.28-.394-.53-.954-.735-1.44-.036.495-.055.685-.523 1.184-.723.566-4.438 3.682-4.74 10.02-.282 5.912 4.27 9.435 4.888 9.884l.07.05A73.49 73.49 0 0 1 11.91 24h.481c.114-1.032.284-2.056.51-3.07.417-.296.604-.463.85-.693a11.342 11.342 0 0 0 3.639-8.464c.01-.814-.103-1.662-.197-2.218zm-5.336 8.195s0-8.291.275-8.29c.213 0 .49 10.695.49 10.695-.381-.045-.765-1.76-.765-2.405z" fill="#47A248"/></svg>` },
       'Node.js': { color: '#339933', bg: 'rgba(51,153,51,0.15)', svg: `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.998 24a1.39 1.39 0 0 1-.696-.186l-2.218-1.31c-.333-.186-.169-.251-.059-.29.44-.153.531-.186.997-.452.048-.027.1-.016.145.01l1.705 1.012c.063.034.15.034.207 0l6.638-3.835c.063-.036.102-.108.102-.184V7.252c0-.077-.039-.148-.104-.185l-6.635-3.83a.188.188 0 0 0-.207 0L5.242 7.068c-.066.038-.106.11-.106.185v7.666c0 .074.04.145.105.18l1.819 1.05c.988.494 1.594-.088 1.594-.674V8.42c0-.107.086-.19.193-.19h.845c.104 0 .19.083.19.19v7.054c0 1.318-.718 2.073-1.968 2.073-.384 0-.686 0-1.532-.415l-1.74-1.003a1.4 1.4 0 0 1-.698-1.209V7.252c0-.498.266-.963.696-1.21l6.638-3.835a1.453 1.453 0 0 1 1.396 0l6.638 3.835c.43.247.697.712.697 1.21v7.666c0 .498-.267.96-.697 1.208l-6.638 3.835a1.39 1.39 0 0 1-.7.186z" fill="#339933"/><path d="M14.207 16.982c-2.9 0-3.508-1.332-3.508-2.448 0-.107.086-.191.192-.191h.862c.095 0 .174.068.19.162.13.878.515 1.32 2.264 1.32 1.393 0 1.985-.315 1.985-1.055 0-.426-.169-.742-2.332-1.053-1.808-.253-2.926-.82-2.926-2.271 0-1.496 1.261-2.386 3.377-2.386 2.374 0 3.552.823 3.7 2.597a.191.191 0 0 1-.19.207h-.865a.192.192 0 0 1-.187-.156c-.232-1.027-.794-1.357-2.458-1.357-1.812 0-2.022.63-2.022 1.104 0 .573.249.74 2.261 1.063 2.011.32 2.997.872 2.997 2.255-.003 1.62-1.35 2.509-3.34 2.509z" fill="#339933"/></svg>` },
       'Hugging Face': { color: '#FFD21E', bg: 'rgba(255,210,30,0.15)', svg: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke="#FFD21E" stroke-width="1.5"/><path d="M8 14s1.5 2 4 2 4-2 4-2" stroke="#FFD21E" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="10" r="1.5" fill="#FFD21E"/><circle cx="15" cy="10" r="1.5" fill="#FFD21E"/></svg>` },
+      'Keras': { color: '#D00000', bg: 'rgba(208,0,0,0.15)', svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>` },
+      'Data Structures & Algorithms': { color: '#10b981', bg: 'rgba(16,185,129,0.15)', svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1 1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1Z"/><path d="M10 11a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1 1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1Z"/><path d="M16 11a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1 1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1Z"/><path d="M22 11a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1 1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1Z"/><path d="M4 14v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>` },
+      'Django': { color: '#092E20', bg: 'rgba(9,46,32,0.15)', svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>` },
+      'HTML5': { color: '#E34F26', bg: 'rgba(227,79,38,0.15)', svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>` },
+      'CSS3': { color: '#1572B6', bg: 'rgba(21,114,182,0.15)', svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>` },
+      'Data Analysis': { color: '#10b981', bg: 'rgba(16,185,129,0.15)', svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12V7a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 7v10a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l4-2.29"/><circle cx="12" cy="12" r="3"/><path d="M14.5 14.5L19 19"/></svg>` },
+      'LLM Training': { color: '#8b5cf6', bg: 'rgba(139,92,246,0.15)', svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 14a4 4 0 1 1 4-4 4 4 0 0 1-4 4z"/><path d="M12 6v2m0 8v2m-5-5H5m14 0h-2"/></svg>` },
+      'Prompt Engineering': { color: '#ec4899', bg: 'rgba(236,72,153,0.15)', svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8m-8 4h5"/></svg>` },
+      'NLP (Transformers)': { color: '#6366f1', bg: 'rgba(99,102,241,0.15)', svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8V4m0 16v-4m-4-4H4m16 0h-4M5.6 5.6l2.8 2.8m7.2 7.2l2.8 2.8M5.6 18.4l2.8-2.8m7.2-7.2l2.8-2.8"/></svg>` },
+      'FastAPI & Streamlit': { color: '#06b6d4', bg: 'rgba(6,182,212,0.15)', svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>` },
+      'Linux (Ubuntu)': { color: '#f97316', bg: 'rgba(249,115,22,0.15)', svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>` },
+      'C++ & Java': { color: '#3b82f6', bg: 'rgba(59,130,246,0.15)', svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>` },
+      'VS Code & Postman': { color: '#22d3ee', bg: 'rgba(34,211,238,0.15)', svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><path d="M9 3v18m6-18v18M3 9h18m-18 6h18"/></svg>` },
+      'Oracle Cloud': { color: '#f43f5e', bg: 'rgba(244,63,94,0.15)', svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.5 19c.6 0 1.1-.1 1.6-.4m.9-2.6c0-2.7-2-5-4.7-5.5-.7-1.5-2.2-2.5-4-2.5-2.2 0-4.1 1.5-4.6 3.6-1.5.3-2.6 1.7-2.6 3.4 0 1.9 1.6 3.5 3.5 3.5h10z"/></svg>` },
     };
 
     const skillGroups = [
       {
-        label: 'Languages',
-        accentColor: '#60a5fa',
+        label: 'AI & Model Development',
+        accentColor: '#818cf8',
         skills: [
-          { name: 'Python', level: 90 },
-          { name: 'C++', level: 80 },
-          { name: 'Java', level: 70 },
-          { name: 'SQL', level: 75 },
-          { name: 'C', level: 65 },
+          { name: 'Python', level: 95 },
+          { name: 'PyTorch', level: 90 },
+          { name: 'TensorFlow', level: 85 },
+          { name: 'OpenCV', level: 88 },
+          { name: 'Scikit-learn', level: 92 },
+          { name: 'Keras', level: 80 },
+          { name: 'Hugging Face', level: 85 },
         ],
       },
       {
-        label: 'Frameworks & Libraries',
+        label: 'Data, Algorithms & LLMs',
         accentColor: '#34d399',
         skills: [
-          { name: 'TensorFlow', level: 75 },
-          { name: 'PyTorch', level: 80 },
-          { name: 'OpenCV', level: 70 },
-          { name: 'Scikit-learn', level: 85 },
-          { name: 'LangChain', level: 65 },
+          { name: 'Data Structures & Algorithms', level: 90 },
+          { name: 'Data Analysis', level: 94 },
+          { name: 'LLM Training', level: 90 },
+          { name: 'Prompt Engineering', level: 95 },
+          { name: 'NLP (Transformers)', level: 92 },
         ],
       },
       {
-        label: 'Tools & Platforms',
-        accentColor: '#f59e0b',
+        label: 'Web & Backend Development',
+        accentColor: '#60a5fa',
         skills: [
-          { name: 'Git & GitHub', level: 88 },
-          { name: 'FastAPI', level: 78 },
-          { name: 'MongoDB', level: 72 },
-          { name: 'Node.js', level: 70 },
-          { name: 'Hugging Face', level: 80 },
+          { name: 'FastAPI & Streamlit', level: 90 },
+          { name: 'Django', level: 85 },
+          { name: 'Node.js', level: 82 },
+          { name: 'HTML5', level: 95 },
+          { name: 'CSS3', level: 92 },
+          { name: 'MongoDB', level: 85 },
+          { name: 'SQL', level: 88 },
+        ],
+      },
+      {
+        label: 'Core Programming & Tools',
+        accentColor: '#fbbf24',
+        skills: [
+          { name: 'C++', level: 92 },
+          { name: 'Java', level: 88 },
+          { name: 'C', level: 85 },
+          { name: 'Git & GitHub', level: 95 },
+          { name: 'Linux (Ubuntu)', level: 90 },
+          { name: 'Oracle Cloud', level: 82 },
+          { name: 'VS Code & Postman', level: 92 },
         ],
       },
     ];
@@ -542,6 +595,14 @@
           <h3 style="font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:2rem;">Experience & Education</h3>
           <div class="overlay-timeline">
             <div class="overlay-timeline-item" style="color:#fbbf24;">
+              <p style="font-size:0.72rem;color:rgba(255,255,255,0.35);margin-bottom:0.25rem;">March 2026 – Present</p>
+              <h4 style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:0.25rem;">Data Analyst LLM Training — Deccan AI</h4>
+              <p style="font-size:0.82rem;color:#fbbf24;margin-bottom:0.5rem;">Remote</p>
+              <p style="font-size:0.85rem;color:rgba(255,255,255,0.55);line-height:1.7;">
+                Analyzing data and training methodologies to improve LLM accuracy and performance.
+              </p>
+            </div>
+            <div class="overlay-timeline-item" style="color:#fbbf24;">
               <p style="font-size:0.72rem;color:rgba(255,255,255,0.35);margin-bottom:0.25rem;">Nov 2024 – Present</p>
               <h4 style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:0.25rem;">Math Trainee — Outlier.ai</h4>
               <p style="font-size:0.82rem;color:#fbbf24;margin-bottom:0.5rem;">Remote</p>
@@ -550,7 +611,7 @@
               </p>
             </div>
             <div class="overlay-timeline-item" style="color:#fbbf24;">
-              <p style="font-size:0.72rem;color:rgba(255,255,255,0.35);margin-bottom:0.25rem;">2022 – 2027 (Expected)</p>
+              <p style="font-size:0.72rem;color:rgba(255,255,255,0.35);margin-bottom:0.25rem;">2023 – 2027 (Expected)</p>
               <h4 style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:0.25rem;">B.Tech CSE — AI & ML</h4>
               <p style="font-size:0.82rem;color:#fbbf24;margin-bottom:0.5rem;">Lovely Professional University, Punjab</p>
               <p style="font-size:0.85rem;color:rgba(255,255,255,0.55);line-height:1.7;">
@@ -564,30 +625,78 @@
         <div>
           <h3 style="font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:2rem;">Certifications</h3>
           <div style="display:flex;flex-direction:column;gap:1rem;">
-            <div class="overlay-card">
-              <div style="display:flex;align-items:flex-start;gap:1rem;">
-                <div style="font-size:1.5rem;">🏅</div>
-                <div>
-                  <p style="font-size:0.9rem;font-weight:600;color:#fff;margin-bottom:0.2rem;">Complete Interview Prep — C++</p>
-                  <p style="font-size:0.75rem;color:rgba(255,255,255,0.4);">GeeksforGeeks · March 2025</p>
+            <!-- Oracle Cloud AI -->
+            <a href="https://www.linkedin.com/in/shivam-yadav39/overlay/Certifications/64771030/treasury/?profileId=ACoAAEc_ZQMBelrQiMwMsRjxEzIVYnQnrPCax2Y" target="_blank" style="text-decoration:none;">
+              <div class="overlay-card hover-lift">
+                <div style="display:flex;align-items:flex-start;gap:1.2rem;">
+                  <div style="font-size:1.6rem;filter:drop-shadow(0 0 8px rgba(96,165,250,0.3));">☁️</div>
+                  <div>
+                    <p style="font-size:0.9rem;font-weight:700;color:#fff;margin-bottom:0.25rem;">Oracle Cloud Infrastructure 2025 AI Foundations</p>
+                    <p style="font-size:0.75rem;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:0.04em;">Oracle · 2025</p>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="overlay-card">
-              <div style="display:flex;align-items:flex-start;gap:1rem;">
-                <div style="font-size:1.5rem;">☁️</div>
-                <div>
-                  <p style="font-size:0.9rem;font-weight:600;color:#fff;margin-bottom:0.2rem;">Oracle Cloud Infrastructure 2025 — AI Foundations Associate</p>
-                  <p style="font-size:0.75rem;color:rgba(255,255,255,0.4);">Oracle University · 2025</p>
+            </a>
+
+            <!-- Essentials Automation -->
+            <a href="https://certificates.automationanywhere.com/74c6ec4f-32ed-4484-9db0-b464a426c08a#acc.xvQZpMBS" target="_blank" style="text-decoration:none;">
+              <div class="overlay-card hover-lift">
+                <div style="display:flex;align-items:flex-start;gap:1.2rem;">
+                  <div style="font-size:1.6rem;filter:drop-shadow(0 0 8px rgba(52,211,153,0.3));">🤖</div>
+                  <div>
+                    <p style="font-size:0.9rem;font-weight:700;color:#fff;margin-bottom:0.25rem;">Essentials Automation Certification</p>
+                    <p style="font-size:0.75rem;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:0.04em;">Automation Anywhere</p>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="overlay-card">
-              <div style="display:flex;align-items:flex-start;gap:1rem;">
-                <div style="font-size:1.5rem;">🧭</div>
+            </a>
+
+            <!-- Master Gen AI -->
+            <a href="https://www.linkedin.com/in/shivam-yadav39/overlay/Certifications/64537320/treasury/?profileId=ACoAAEc_ZQMBelrQiMwMsRjxEzIVYnQnrPCax2Y" target="_blank" style="text-decoration:none;">
+              <div class="overlay-card hover-lift">
+                <div style="display:flex;align-items:flex-start;gap:1.2rem;">
+                  <div style="font-size:1.6rem;filter:drop-shadow(0 0 8px rgba(139,92,246,0.3));">🧠</div>
+                  <div>
+                    <p style="font-size:0.9rem;font-weight:700;color:#fff;margin-bottom:0.25rem;">Master Generative AI & Tools</p>
+                    <p style="font-size:0.75rem;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:0.04em;">LinkedIn Learning · 2024</p>
+                  </div>
+                </div>
+              </div>
+            </a>
+
+            <!-- ChatGPT-4 Prompt Eng -->
+            <a href="https://www.linkedin.com/in/shivam-yadav39/overlay/Certifications/64257044/treasury/?profileId=ACoAAEc_ZQMBelrQiMwMsRjxEzIVYnQnrPCax2Y" target="_blank" style="text-decoration:none;">
+              <div class="overlay-card hover-lift">
+                <div style="display:flex;align-items:flex-start;gap:1.2rem;">
+                  <div style="font-size:1.6rem;filter:drop-shadow(0 0 8px rgba(245,158,11,0.3));">⚡</div>
+                  <div>
+                    <p style="font-size:0.9rem;font-weight:700;color:#fff;margin-bottom:0.25rem;">ChatGPT-4 Prompt Engineering</p>
+                    <p style="font-size:0.75rem;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:0.04em;">Udemy · 2024</p>
+                  </div>
+                </div>
+              </div>
+            </a>
+
+            <!-- Intro to Gen AI -->
+            <a href="https://www.coursera.org/account/accomplishments/certificate/7YXQ8CC1VIJO" target="_blank" style="text-decoration:none;">
+              <div class="overlay-card hover-lift">
+                <div style="display:flex;align-items:flex-start;gap:1.2rem;">
+                  <div style="font-size:1.6rem;filter:drop-shadow(0 0 8px rgba(239,68,68,0.3));">🎓</div>
+                  <div>
+                    <p style="font-size:0.9rem;font-weight:700;color:#fff;margin-bottom:0.25rem;">Intro to Generative AI by Google</p>
+                    <p style="font-size:0.75rem;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:0.04em;">Google Cloud · Coursera</p>
+                  </div>
+                </div>
+              </div>
+            </a>
+
+            <!-- Career Direction -->
+            <div class="overlay-card" style="margin-top:0.5rem;border-left:2px solid #22d3ee;">
+              <div style="display:flex;align-items:flex-start;gap:1.2rem;">
+                <div style="font-size:1.6rem;">🧭</div>
                 <div>
-                  <p style="font-size:0.9rem;font-weight:600;color:#fff;margin-bottom:0.2rem;">Career Direction</p>
-                  <p style="font-size:0.78rem;color:rgba(255,255,255,0.55);line-height:1.7;">
+                  <p style="font-size:0.9rem;font-weight:700;color:#fff;margin-bottom:0.25rem;">Career Direction</p>
+                  <p style="font-size:0.8rem;color:rgba(255,255,255,0.6);line-height:1.7;">
                     Project Builder → Product Engineer → AI Systems Designer
                   </p>
                 </div>
