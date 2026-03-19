@@ -16,21 +16,28 @@
     rel="stylesheet" />
 
   <!-- Lucide Icons -->
-  <script src="https://cdn.jsdelivr.net/npm/lucide-static@0.368.0/bundle/lucide.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="sections.css" />
+
+  <!-- Three.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 
 <body class="antialiased">
-  <!-- Background Particles (optional container) -->
-  <div id="particle-container" class="fixed top-0 left-0 w-full h-full z-[-2]"></div>
+  <!-- Interactive 3D Background -->
+  <div id="spaceship-container" class="fixed top-0 left-0 w-full h-full z-[-3] pointer-events-none"></div>
+
+  <!-- Background Particles (bokeh) layer -->
+  <div id="particle-container" class="fixed top-0 left-0 w-full h-full z-[-2] pointer-events-none opacity-60"></div>
 
   <!-- NAVBAR -->
   <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 glass-effect/80 border-b border-white/5">
     <div class="container mx-auto px-6 py-3 flex justify-between items-center">
       <h1 class="text-xl md:text-2xl font-bold tracking-widest text-white">
-        SHIVAM<span class="text-[#007aff]">.Y</span>
+        SHIVAM <span class="text-indigo-300">YADAV</span>
       </h1>
 
       <!-- Desktop Nav -->
@@ -76,86 +83,123 @@
     <!-- HERO -->
     <section id="hero"
       class="relative min-h-screen flex flex-col md:flex-row items-center justify-between gap-10 md:gap-16 -mt-10">
-      <div class="hero-bg"></div>
+
+      <!-- Enhanced Hero Background -->
+      <div class="hero-bg-new"></div>
+      <canvas id="hero-canvas" class="hero-canvas"></canvas>
 
       <!-- Left: Text -->
       <div class="z-10 max-w-xl space-y-5">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs">
+
+        <!-- Status badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full hero-badge text-xs font-medium">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span class="text-gray-300">AI & ML Engineer · Math Trainee @ Outlier.ai</span>
+          <span class="text-gray-200">Available for Internships &amp; Collabs</span>
+          <span class="text-emerald-400">●</span>
         </div>
 
-        <h2 class="text-4xl md:text-6xl font-extrabold text-white leading-tight min-h-[160px] md:min-h-[auto]">
-          <span id="typing-text"
-            class="typing-cursor text-transparent bg-clip-text bg-gradient-to-r from-[#007aff] to-cyan-400">
-            Building Intelligent Systems
-          </span>
-          <br />
-          <span class="text-3xl md:text-5xl mt-2 block">for Real-World Impact</span>
-        </h2>
+        <!-- Name + Typing -->
+        <div>
+          <p class="text-gray-500 text-sm font-mono mb-1 tracking-widest">// shivam_yadav.init()</p>
+          <h2 class="text-4xl md:text-6xl font-extrabold text-white leading-tight">
+            <span id="typing-text"
+              class="typing-cursor text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 via-purple-300 to-fuchsia-300">
+              Building Intelligent Systems
+            </span>
+            <br />
+            <span class="text-3xl md:text-4xl mt-2 block text-white/80">for Real-World Impact</span>
+          </h2>
+        </div>
 
-        <p class="text-gray-300 text-base md:text-lg">
-          I'm <span class="font-semibold text-white">Shivam Yadav</span>, a 3rd-year
-          <span class="text-[#00d4ff] font-medium">B.Tech CSE (AI & ML)</span> student at LPU, focused on NLP, backend
-          systems, and AI-powered products like Fake News Detection, School ERP, and Health Assistants.
-        </p>
+        <!-- Description -->
+        <div class="space-y-2">
+          <p class="text-gray-300 text-base md:text-lg leading-relaxed">
+            I'm <span class="font-bold text-white">Shivam Yadav</span> — pursuing
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-cyan-300 font-bold">B.Tech
+              CSE</span>
+            with specialization in
+            <span
+              class="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-indigo-300 font-bold">Artificial
+              Intelligence &amp; Machine Learning</span>
+            at LPU, Punjab.
+          </p>
+          <p class="text-gray-400 text-sm leading-relaxed">
+            Focused on NLP, Transformers, Computer Vision &amp; scalable backend systems. Building AI-powered products
+            that make a real-world difference.
+          </p>
+        </div>
 
-        <div class="flex flex-wrap gap-3">
-          <a href="#projects"
-            class="inline-flex items-center gap-2 bg-[#007aff] text-white font-semibold py-3 px-6 rounded-full hover:bg-blue-600 transition-all duration-300 transform hover:scale-105">
+        <!-- AI/ML Domain Tags -->
+        <div class="flex flex-wrap gap-2">
+          <span class="hero-domain-tag">🧠 NLP</span>
+          <span class="hero-domain-tag">🤖 Deep Learning</span>
+          <span class="hero-domain-tag">🔬 Computer Vision</span>
+          <span class="hero-domain-tag">⚡ FastAPI</span>
+          <span class="hero-domain-tag">🦜 LangChain</span>
+          <span class="hero-domain-tag">🐍 Python</span>
+        </div>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-wrap gap-3 pt-1">
+          <a href="#projects" class="hero-btn-primary inline-flex items-center gap-2">
             <i data-lucide="rocket" class="w-4 h-4"></i>
             View Projects
           </a>
-          <a href="#contact"
-            class="inline-flex items-center gap-2 px-4 py-3 rounded-full border border-white/20 text-gray-200 hover:bg-white/5 transition-all">
+          <a href="#contact" class="hero-btn-ghost inline-flex items-center gap-2">
             <i data-lucide="mail" class="w-4 h-4"></i>
-            Let’s Connect
+            Let's Connect
           </a>
         </div>
 
-        <div class="grid grid-cols-3 gap-4 pt-4 text-sm">
-          <div class="stat-card">
-            <p class="text-xs text-gray-400">Core Focus</p>
-            <p class="text-white font-semibold">NLP · ML · Backend</p>
+        <!-- Stats row -->
+        <div class="grid grid-cols-3 gap-3 pt-2">
+          <div class="hero-stat-card">
+            <p class="hero-stat-num">3+</p>
+            <p class="hero-stat-label">AI Projects</p>
           </div>
-          <div class="stat-card">
-            <p class="text-xs text-gray-400">Tech Stack</p>
-            <p class="text-white font-semibold">Python · C++ · Node</p>
+          <div class="hero-stat-card">
+            <p class="hero-stat-num">92%</p>
+            <p class="hero-stat-label">BERT Accuracy</p>
           </div>
-          <div class="stat-card">
-            <p class="text-xs text-gray-400">Location</p>
-            <p class="text-white font-semibold">Punjab, India 🇮🇳</p>
+          <div class="hero-stat-card">
+            <p class="hero-stat-num">2027</p>
+            <p class="hero-stat-label">Graduation</p>
           </div>
         </div>
       </div>
 
-      <!-- Right: Photo Card -->
+      <!-- Right: Profile Card -->
       <div class="z-10 w-full md:w-auto flex justify-center">
-        <div class="relative group">
-          <div
-            class="w-60 h-60 md:w-72 md:h-72 rounded-3xl photo-gradient-border p-1 relative overflow-hidden shadow-2xl">
-            <div class="w-full h-full rounded-3xl overflow-hidden bg-gray-900">
-              <img src="'/Users/shivamyadav/Downloads/WhatsApp Image 2024-04-28 at 20.27.46.png'" alt="Shivam Yadav"
-                class="w-full h-full about-photo" />
-            </div>
+        <div class="relative group profile-wrapper">
+
+          <!-- Spinning ring -->
+          <div class="profile-ring-outer"></div>
+          <div class="profile-ring-inner"></div>
+
+          <!-- Photo -->
+          <div class="profile-photo-frame">
+            <img src="assets/profile.jpeg" alt="Shivam Yadav" class="profile-photo" />
+            <!-- Shimmer overlay on hover -->
+            <div class="profile-shimmer"></div>
           </div>
 
-          <!-- Floating badges -->
-          <div
-            class="absolute -top-4 -right-4 glass-effect px-3 py-2 rounded-2xl text-xs flex items-center gap-2 border border-emerald-400/50">
-            <i data-lucide="brain-circuit" class="w-4 h-4 text-emerald-300"></i>
-            <span>NLP · BERT · Transformers</span>
-          </div>
-          <div
-            class="absolute -bottom-4 -left-4 glass-effect px-3 py-2 rounded-2xl text-xs flex items-center gap-2 border border-[#007aff]/50">
-            <i data-lucide="code-2" class="w-4 h-4 text-[#007aff]"></i>
-            <span>DSA · Systems · APIs</span>
+          <!-- Floating AI badges -->
+          <div class="profile-badge profile-badge-top">
+            <span class="badge-dot bg-emerald-400"></span>
+            <span class="text-xs font-semibold">🧠 NLP · BERT · Transformers</span>
           </div>
 
-          <div class="absolute inset-0 rounded-3xl photo-glow opacity-0 group-hover:opacity-100"></div>
-          <div
-            class="absolute inset-0 rounded-3xl border border-[#007aff]/60 opacity-0 group-hover:opacity-100 animate-spin-slow">
+          <div class="profile-badge profile-badge-bottom">
+            <span class="badge-dot bg-[#007aff]"></span>
+            <span class="text-xs font-semibold">⚡ DSA · APIs · ML Systems</span>
           </div>
+
+          <div class="profile-badge profile-badge-left">
+            <span class="text-xs font-semibold">🎓 LPU · 2027</span>
+          </div>
+
+          <!-- Glow effect -->
+          <div class="profile-glow"></div>
         </div>
       </div>
     </section>
@@ -178,9 +222,10 @@
           </p>
           <p class="text-gray-300 text-sm md:text-base">
             Currently pursuing
-            <span class="font-medium text-white">B.Tech CSE (AI & ML)</span> at
-            <span class="font-medium text-white">Lovely Professional University, Punjab</span> with an expected
-            graduation in 2027.
+            <span class="font-medium text-white">B.Tech CSE</span> with specialization in
+            <span class="text-purple-400 font-medium">Artificial Intelligence & Machine Learning</span> at
+            <span class="font-medium text-white">Lovely Professional University, Punjab</span> — expected graduation
+            <span class="text-[#007aff] font-bold">2027</span>.
           </p>
         </div>
 
@@ -216,8 +261,8 @@
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
         <!-- Fake News Detection -->
-        <article
-          class="project-card glass-effect rounded-2xl p-6 flex flex-col justify-between stagger-delay-1 section-reveal">
+        <article data-project="fake-news"
+          class="project-card cursor-pointer glass-effect rounded-2xl p-6 flex flex-col justify-between stagger-delay-1 section-reveal group">
           <div>
             <div class="flex items-center justify-between mb-3">
               <h3 class="text-xl font-semibold text-white">Fake News Detection (BERT)</h3>
@@ -243,8 +288,8 @@
         </article>
 
         <!-- School ERP -->
-        <article
-          class="project-card glass-effect rounded-2xl p-6 flex flex-col justify-between stagger-delay-2 section-reveal">
+        <article data-project="school-erp"
+          class="project-card cursor-pointer glass-effect rounded-2xl p-6 flex flex-col justify-between stagger-delay-2 section-reveal group">
           <div>
             <div class="flex items-center justify-between mb-3">
               <h3 class="text-xl font-semibold text-white">School ERP Management System</h3>
@@ -270,8 +315,8 @@
         </article>
 
         <!-- Face Recognition Attendance -->
-        <article
-          class="project-card glass-effect rounded-2xl p-6 flex flex-col justify-between stagger-delay-3 section-reveal">
+        <article data-project="face-recognition"
+          class="project-card cursor-pointer glass-effect rounded-2xl p-6 flex flex-col justify-between stagger-delay-3 section-reveal group">
           <div>
             <div class="flex items-center justify-between mb-3">
               <h3 class="text-xl font-semibold text-white">Face Recognition Attendance</h3>
@@ -308,16 +353,16 @@
       </div>
     </section>
 
-    <!-- MODAL (Fake News Project) -->
+    <!-- MODAL (Dynamic Project Details) -->
     <div id="project-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
       <div id="modal-backdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm opacity-0"></div>
       <div id="modal-content" class="glass-effect rounded-2xl w-full max-w-3xl z-10 p-8 transform scale-95 opacity-0">
         <div class="flex justify-between items-start mb-4 gap-4">
           <div>
-            <h2 class="text-2xl md:text-3xl font-bold text-white mb-1">
-              Fake News Detection using NLP
+            <h2 id="modal-title" class="text-2xl md:text-3xl font-bold text-white mb-1">
+              Project Title
             </h2>
-            <p class="text-sm text-gray-400">End-to-end real vs fake news classification pipeline</p>
+            <p id="modal-subtitle" class="text-sm text-gray-400">Project subtitle</p>
           </div>
           <button class="close-modal-btn text-gray-400 hover:text-white text-2xl font-bold leading-none">
             &times;
@@ -326,32 +371,21 @@
 
         <div class="space-y-5 text-sm md:text-base text-gray-200">
           <div>
-            <h3 class="modal-section-title">Objective</h3>
-            <p>
-              Develop an intelligent system to automatically detect fake news articles using deep learning and modern
-              transformer-based NLP.
+            <h3 class="modal-section-title">Objective & Use</h3>
+            <p id="modal-objective">
+              Project objective and usage details will appear here.
             </p>
           </div>
 
           <div>
             <h3 class="modal-section-title">Key Features</h3>
-            <ul class="list-disc list-inside space-y-1.5">
-              <li>Merged and cleaned large news datasets, removed noise and performed tokenization.</li>
-              <li>Fine-tuned a pre-trained BERT model for binary classification.</li>
-              <li>Used stratified splitting, careful evaluation and confusion matrix analysis.</li>
-              <li>Achieved ~92% validation accuracy on carefully curated evaluation data.</li>
+            <ul id="modal-features" class="list-disc list-inside space-y-1.5">
             </ul>
           </div>
 
           <div>
             <h3 class="modal-section-title">Tech Stack</h3>
-            <div class="flex flex-wrap gap-2">
-              <span class="tag">Python</span>
-              <span class="tag">PyTorch</span>
-              <span class="tag">Hugging Face</span>
-              <span class="tag">BERT</span>
-              <span class="tag">Scikit-learn</span>
-              <span class="tag">Pandas</span>
+            <div id="modal-tech" class="flex flex-wrap gap-2">
             </div>
           </div>
         </div>
@@ -368,13 +402,72 @@
             <i data-lucide="code-2" class="w-5 h-5 text-[#007aff]"></i>
             Languages
           </h3>
-          <ul class="text-gray-300 text-sm space-y-1">
-            <li>Python</li>
-            <li>C++</li>
-            <li>Java</li>
-            <li>C</li>
-            <li>SQL</li>
-          </ul>
+          <div class="space-y-5 mt-5">
+            <div class="space-y-2 group">
+              <div class="flex justify-between text-sm items-center">
+                <div class="flex items-center gap-3">
+                  <div class="p-1.5 rounded-md bg-white/5 border border-white/10 group-hover:bg-indigo-500/20 group-hover:border-indigo-500/40 transition-all">
+                    <i data-lucide="file-json" class="w-4 h-4 text-indigo-400"></i>
+                  </div>
+                  <span class="text-white font-medium tracking-wider text-sm">Python</span>
+                </div>
+                <span class="text-indigo-300 font-bold">95%</span>
+              </div>
+              <div class="w-full bg-gray-800 rounded-full h-1.5"><div class="bg-gradient-to-r from-indigo-500 to-purple-500 h-1.5 rounded-full" style="width: 95%"></div></div>
+            </div>
+            
+            <div class="space-y-2 group">
+              <div class="flex justify-between text-sm items-center">
+                <div class="flex items-center gap-3">
+                  <div class="p-1.5 rounded-md bg-white/5 border border-white/10 group-hover:bg-indigo-500/20 group-hover:border-indigo-500/40 transition-all">
+                    <i data-lucide="file-code-2" class="w-4 h-4 text-indigo-400"></i>
+                  </div>
+                  <span class="text-white font-medium tracking-wider text-sm">C++</span>
+                </div>
+                <span class="text-indigo-300 font-bold">90%</span>
+              </div>
+              <div class="w-full bg-gray-800 rounded-full h-1.5"><div class="bg-gradient-to-r from-indigo-500 to-purple-500 h-1.5 rounded-full" style="width: 90%"></div></div>
+            </div>
+            
+            <div class="space-y-2 group">
+              <div class="flex justify-between text-sm items-center">
+                <div class="flex items-center gap-3">
+                  <div class="p-1.5 rounded-md bg-white/5 border border-white/10 group-hover:bg-indigo-500/20 group-hover:border-indigo-500/40 transition-all">
+                    <i data-lucide="coffee" class="w-4 h-4 text-indigo-400"></i>
+                  </div>
+                  <span class="text-white font-medium tracking-wider text-sm">Java</span>
+                </div>
+                <span class="text-indigo-300 font-bold">85%</span>
+              </div>
+              <div class="w-full bg-gray-800 rounded-full h-1.5"><div class="bg-gradient-to-r from-indigo-500 to-purple-500 h-1.5 rounded-full" style="width: 85%"></div></div>
+            </div>
+            
+            <div class="space-y-2 group">
+              <div class="flex justify-between text-sm items-center">
+                <div class="flex items-center gap-3">
+                  <div class="p-1.5 rounded-md bg-white/5 border border-white/10 group-hover:bg-indigo-500/20 group-hover:border-indigo-500/40 transition-all">
+                    <i data-lucide="terminal-square" class="w-4 h-4 text-indigo-400"></i>
+                  </div>
+                  <span class="text-white font-medium tracking-wider text-sm">C</span>
+                </div>
+                <span class="text-indigo-300 font-bold">80%</span>
+              </div>
+              <div class="w-full bg-gray-800 rounded-full h-1.5"><div class="bg-gradient-to-r from-indigo-500 to-purple-500 h-1.5 rounded-full" style="width: 80%"></div></div>
+            </div>
+            
+            <div class="space-y-2 group">
+              <div class="flex justify-between text-sm items-center">
+                <div class="flex items-center gap-3">
+                  <div class="p-1.5 rounded-md bg-white/5 border border-white/10 group-hover:bg-indigo-500/20 group-hover:border-indigo-500/40 transition-all">
+                    <i data-lucide="database" class="w-4 h-4 text-indigo-400"></i>
+                  </div>
+                  <span class="text-white font-medium tracking-wider text-sm">SQL</span>
+                </div>
+                <span class="text-indigo-300 font-bold">88%</span>
+              </div>
+              <div class="w-full bg-gray-800 rounded-full h-1.5"><div class="bg-gradient-to-r from-indigo-500 to-purple-500 h-1.5 rounded-full" style="width: 88%"></div></div>
+            </div>
+          </div>
         </div>
 
         <!-- Frameworks -->
@@ -383,12 +476,59 @@
             <i data-lucide="cpu" class="w-5 h-5 text-emerald-400"></i>
             Frameworks
           </h3>
-          <ul class="text-gray-300 text-sm space-y-1">
-            <li>TensorFlow</li>
-            <li>PyTorch</li>
-            <li>OpenCV</li>
-            <li>Scikit-learn</li>
-          </ul>
+          <div class="space-y-5 mt-5">
+            <div class="space-y-2 group">
+              <div class="flex justify-between text-sm items-center">
+                <div class="flex items-center gap-3">
+                  <div class="p-1.5 rounded-md bg-white/5 border border-white/10 group-hover:bg-teal-500/20 group-hover:border-teal-500/40 transition-all">
+                    <i data-lucide="network" class="w-4 h-4 text-teal-400"></i>
+                  </div>
+                  <span class="text-white font-medium tracking-wider text-sm">TensorFlow</span>
+                </div>
+                <span class="text-teal-300 font-bold">92%</span>
+              </div>
+              <div class="w-full bg-gray-800 rounded-full h-1.5"><div class="bg-gradient-to-r from-teal-500 to-emerald-500 h-1.5 rounded-full" style="width: 92%"></div></div>
+            </div>
+            
+            <div class="space-y-2 group">
+              <div class="flex justify-between text-sm items-center">
+                <div class="flex items-center gap-3">
+                  <div class="p-1.5 rounded-md bg-white/5 border border-white/10 group-hover:bg-teal-500/20 group-hover:border-teal-500/40 transition-all">
+                    <i data-lucide="flame" class="w-4 h-4 text-teal-400"></i>
+                  </div>
+                  <span class="text-white font-medium tracking-wider text-sm">PyTorch</span>
+                </div>
+                <span class="text-teal-300 font-bold">90%</span>
+              </div>
+              <div class="w-full bg-gray-800 rounded-full h-1.5"><div class="bg-gradient-to-r from-teal-500 to-emerald-500 h-1.5 rounded-full" style="width: 90%"></div></div>
+            </div>
+            
+            <div class="space-y-2 group">
+              <div class="flex justify-between text-sm items-center">
+                <div class="flex items-center gap-3">
+                  <div class="p-1.5 rounded-md bg-white/5 border border-white/10 group-hover:bg-teal-500/20 group-hover:border-teal-500/40 transition-all">
+                    <i data-lucide="eye" class="w-4 h-4 text-teal-400"></i>
+                  </div>
+                  <span class="text-white font-medium tracking-wider text-sm">OpenCV</span>
+                </div>
+                <span class="text-teal-300 font-bold">85%</span>
+              </div>
+              <div class="w-full bg-gray-800 rounded-full h-1.5"><div class="bg-gradient-to-r from-teal-500 to-emerald-500 h-1.5 rounded-full" style="width: 85%"></div></div>
+            </div>
+            
+            <div class="space-y-2 group">
+              <div class="flex justify-between text-sm items-center">
+                <div class="flex items-center gap-3">
+                  <div class="p-1.5 rounded-md bg-white/5 border border-white/10 group-hover:bg-teal-500/20 group-hover:border-teal-500/40 transition-all">
+                    <i data-lucide="brain-circuit" class="w-4 h-4 text-teal-400"></i>
+                  </div>
+                  <span class="text-white font-medium tracking-wider text-sm">Scikit-learn</span>
+                </div>
+                <span class="text-teal-300 font-bold">88%</span>
+              </div>
+              <div class="w-full bg-gray-800 rounded-full h-1.5"><div class="bg-gradient-to-r from-teal-500 to-emerald-500 h-1.5 rounded-full" style="width: 88%"></div></div>
+            </div>
+          </div>
         </div>
 
         <!-- Tools -->
@@ -397,12 +537,59 @@
             <i data-lucide="tools" class="w-5 h-5 text-[#00d4ff]"></i>
             Tools & Platforms
           </h3>
-          <ul class="text-gray-300 text-sm space-y-1">
-            <li>LangChain, Hugging Face</li>
-            <li>FastAPI, Streamlit</li>
-            <li>Seaborn, Matplotlib</li>
-            <li>Git, GitHub, VS Code, Postman</li>
-          </ul>
+          <div class="space-y-5 mt-5">
+            <div class="space-y-2 group">
+              <div class="flex justify-between text-sm items-center">
+                <div class="flex items-center gap-3">
+                  <div class="p-1.5 rounded-md bg-white/5 border border-white/10 group-hover:bg-cyan-500/20 group-hover:border-cyan-500/40 transition-all">
+                    <i data-lucide="bot" class="w-4 h-4 text-cyan-400"></i>
+                  </div>
+                  <span class="text-white font-medium tracking-wider text-sm">LangChain & Hugging Face</span>
+                </div>
+                <span class="text-cyan-300 font-bold">95%</span>
+              </div>
+              <div class="w-full bg-gray-800 rounded-full h-1.5"><div class="bg-gradient-to-r from-cyan-500 to-blue-500 h-1.5 rounded-full" style="width: 95%"></div></div>
+            </div>
+            
+            <div class="space-y-2 group">
+              <div class="flex justify-between text-sm items-center">
+                <div class="flex items-center gap-3">
+                  <div class="p-1.5 rounded-md bg-white/5 border border-white/10 group-hover:bg-cyan-500/20 group-hover:border-cyan-500/40 transition-all">
+                    <i data-lucide="zap" class="w-4 h-4 text-cyan-400"></i>
+                  </div>
+                  <span class="text-white font-medium tracking-wider text-sm">FastAPI & Streamlit</span>
+                </div>
+                <span class="text-cyan-300 font-bold">90%</span>
+              </div>
+              <div class="w-full bg-gray-800 rounded-full h-1.5"><div class="bg-gradient-to-r from-cyan-500 to-blue-500 h-1.5 rounded-full" style="width: 90%"></div></div>
+            </div>
+            
+            <div class="space-y-2 group">
+              <div class="flex justify-between text-sm items-center">
+                <div class="flex items-center gap-3">
+                  <div class="p-1.5 rounded-md bg-white/5 border border-white/10 group-hover:bg-cyan-500/20 group-hover:border-cyan-500/40 transition-all">
+                    <i data-lucide="bar-chart-2" class="w-4 h-4 text-cyan-400"></i>
+                  </div>
+                  <span class="text-white font-medium tracking-wider text-sm">Seaborn & Matplotlib</span>
+                </div>
+                <span class="text-cyan-300 font-bold">85%</span>
+              </div>
+              <div class="w-full bg-gray-800 rounded-full h-1.5"><div class="bg-gradient-to-r from-cyan-500 to-blue-500 h-1.5 rounded-full" style="width: 85%"></div></div>
+            </div>
+            
+            <div class="space-y-2 group">
+              <div class="flex justify-between text-sm items-center">
+                <div class="flex items-center gap-3">
+                  <div class="p-1.5 rounded-md bg-white/5 border border-white/10 group-hover:bg-cyan-500/20 group-hover:border-cyan-500/40 transition-all">
+                    <i data-lucide="git-merge" class="w-4 h-4 text-cyan-400"></i>
+                  </div>
+                  <span class="text-white font-medium tracking-wider text-sm">Git, GitHub, VS Code, Postman</span>
+                </div>
+                <span class="text-cyan-300 font-bold">92%</span>
+              </div>
+              <div class="w-full bg-gray-800 rounded-full h-1.5"><div class="bg-gradient-to-r from-cyan-500 to-blue-500 h-1.5 rounded-full" style="width: 92%"></div></div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -425,7 +612,7 @@
           </div>
 
           <div class="timeline-item">
-            <p class="text-xs text-gray-400 mb-1">2022 – 2026 (Expected)</p>
+            <p class="text-xs text-gray-400 mb-1">2023 – 2027 (Expected)</p>
             <h3 class="text-lg font-semibold text-white">
               B.Tech CSE — Artificial Intelligence & Machine Learning
             </h3>
@@ -509,13 +696,14 @@
       </div>
 
       <!-- Contact Cards -->
-      <h3 class="text-2xl md:text-3xl font-bold text-center mb-4 text-white">
-        Get In Touch
-      </h3>
-      <p class="text-center text-sm md:text-base text-gray-400 max-w-2xl mx-auto mb-8">
-        I'm open to internships, freelance projects, collaborations, and AI-focused roles. Feel free to reach out —
-        I’ll get back to you as soon as I can.
-      </p>
+      <div class="text-center mb-10">
+        <h3 class="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 via-purple-300 to-fuchsia-300 mb-4 tracking-tight">
+          Open to Opportunities & Collaborations
+        </h3>
+        <p class="text-sm md:text-base text-gray-400 max-w-2xl mx-auto">
+          I'm currently exploring internships, freelance projects, and AI-focused roles. Let's build something extraordinary together.
+        </p>
+      </div>
 
       <div class="max-w-2xl mx-auto mb-10 text-center">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -585,8 +773,10 @@
   </footer>
 
   <!-- Scripts -->
+  <script src="spaceship.js"></script>
   <script src="particles.js"></script>
   <script src="script.js"></script>
+  <script src="sections.js"></script>
 </body>
 
 </html>

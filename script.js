@@ -15,6 +15,79 @@ document.addEventListener("DOMContentLoaded", () => {
     window.initParticles("particle-container");
   }
 
+  // ========== HERO CANVAS ANIMATION ==========
+  (function initHeroCanvas() {
+    const canvas = document.getElementById('hero-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let w, h, pts = [], animId;
+    const N = 55;
+
+    function resize() {
+      const parent = canvas.parentElement;
+      w = canvas.width = parent.offsetWidth;
+      h = canvas.height = parent.offsetHeight;
+    }
+
+    function mkPt() {
+      const palette = [
+        [0, 122, 255],   // blue
+        [139, 92, 246],  // violet
+        [34, 211, 238],  // cyan
+        [236, 72, 153],  // pink
+        [52, 211, 153],  // green
+      ];
+      const c = palette[Math.floor(Math.random() * palette.length)];
+      return {
+        x: Math.random() * w, y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4,
+        r: Math.random() * 2.5 + 0.5,
+        c: c, a: Math.random() * 0.5 + 0.2,
+        pulse: Math.random() * Math.PI * 2,
+        ps: 0.015 + Math.random() * 0.02,
+      };
+    }
+
+    function init() { resize(); pts = Array.from({ length: N }, mkPt); }
+
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+      // connections
+      for (let i = 0; i < pts.length; i++) {
+        for (let j = i + 1; j < pts.length; j++) {
+          const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
+          const d = Math.sqrt(dx * dx + dy * dy);
+          if (d < 120) {
+            const alpha = (1 - d / 120) * 0.12;
+            ctx.strokeStyle = `rgba(${pts[i].c.join(',')},${alpha})`;
+            ctx.lineWidth = 0.8;
+            ctx.beginPath();
+            ctx.moveTo(pts[i].x, pts[i].y); ctx.lineTo(pts[j].x, pts[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+      // dots
+      pts.forEach(p => {
+        p.pulse += p.ps;
+        const a = p.a * (0.5 + 0.5 * Math.sin(p.pulse));
+        const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 4);
+        grad.addColorStop(0, `rgba(${p.c.join(',')},${a})`);
+        grad.addColorStop(1, `rgba(${p.c.join(',')},0)`);
+        ctx.fillStyle = grad;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r * 4, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = `rgba(${p.c.join(',')},${Math.min(a * 2.5, 1)})`;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
+        if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
+      });
+      animId = requestAnimationFrame(draw);
+    }
+    new ResizeObserver(resize).observe(canvas.parentElement);
+    init(); draw();
+  })();
+
   // ========== TYPING EFFECT ==========
   const typingElement = document.getElementById("typing-text");
   const phrases = [
@@ -129,11 +202,68 @@ document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("project-modal");
   const modalBackdrop = document.getElementById("modal-backdrop");
   const modalContent = document.getElementById("modal-content");
-  const openModalBtns = document.querySelectorAll(".open-modal-btn");
   const closeModalBtns = document.querySelectorAll(".close-modal-btn");
+  const projectCards = document.querySelectorAll(".project-card");
 
-  function openModal() {
+  const projectDetails = {
+    "fake-news": {
+      title: "Fake News Detection using NLP",
+      subtitle: "End-to-end real vs fake news classification pipeline",
+      objective: "Develop an intelligent system to automatically detect fake news articles using deep learning and modern transformer-based NLP. Useful for filtering out misinformation on social platforms.",
+      features: [
+        "Merged and cleaned large news datasets, removed noise and performed tokenization.",
+        "Fine-tuned a pre-trained BERT model for binary classification.",
+        "Used stratified splitting, careful evaluation and confusion matrix analysis.",
+        "Achieved ~92% validation accuracy on carefully curated evaluation data."
+      ],
+      tech: ["Python", "PyTorch", "Hugging Face", "BERT", "Scikit-learn", "Pandas"]
+    },
+    "school-erp": {
+      title: "School ERP Management System",
+      subtitle: "Web-based ERP for schools handling students, staff, fees, attendance, and analytics",
+      objective: "Create a centralized management system for educational institutions to streamline administrative tasks and improve communication. Used by schools to digitize operations.",
+      features: [
+        "Secure role-based authentication system for admins, teachers, and students.",
+        "Comprehensive modules for fee tracking, attendance management, and timetable scheduling.",
+        "Interactive analytics dashboard for insights into student performance.",
+        "Responsive UI accessible across devices."
+      ],
+      tech: ["Node.js", "Express", "MongoDB", "EJS", "HTML / CSS"]
+    },
+    "face-recognition": {
+      title: "Face Recognition Attendance",
+      subtitle: "Desktop app to mark attendance in real time using face recognition",
+      objective: "Automate the attendance tracking process using computer vision to eliminate manual entry and proxy attendance. Useful for classrooms and offices.",
+      features: [
+        "Real-time face detection and recognition using Haar Cascades and LBPH.",
+        "Interactive GUI built with Tkinter for dataset collection and model training.",
+        "Automatic linking of recognized faces to student IDs and database records.",
+        "Exportable attendance reports in Excel/CSV formats."
+      ],
+      tech: ["Python", "OpenCV", "Tkinter", "LBPH"]
+    }
+  };
+
+  function openModal(projectId) {
     if (!modal || !modalBackdrop || !modalContent) return;
+
+    const data = projectDetails[projectId];
+    if (data) {
+      document.getElementById("modal-title").textContent = data.title;
+      document.getElementById("modal-subtitle").textContent = data.subtitle;
+      document.getElementById("modal-objective").textContent = data.objective;
+      
+      const featuresList = document.getElementById("modal-features");
+      if (featuresList) {
+        featuresList.innerHTML = data.features.map(f => `<li>${f}</li>`).join("");
+      }
+      
+      const techList = document.getElementById("modal-tech");
+      if (techList) {
+        techList.innerHTML = data.tech.map(t => `<span class="tag">${t}</span>`).join("");
+      }
+    }
+
     modal.classList.remove("hidden");
     modal.classList.add("flex");
     document.body.style.overflow = "hidden";
@@ -160,7 +290,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 250);
   }
 
-  openModalBtns.forEach((btn) => btn.addEventListener("click", openModal));
+  projectCards.forEach((card) => {
+    card.addEventListener("click", (e) => {
+      // Prevent opening modal if clicking a real external link or a child button that has another action
+      if (e.target.closest('a[href]:not([href="#"])')) {
+        return;
+      }
+      e.preventDefault();
+      const projectId = card.getAttribute("data-project");
+      if (projectId) openModal(projectId);
+    });
+  });
+
   closeModalBtns.forEach((btn) => btn.addEventListener("click", closeModal));
   if (modalBackdrop) modalBackdrop.addEventListener("click", closeModal);
 
@@ -205,7 +346,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   async function fetchProjectIdeasFromBackend() {
-    if (!BACKEND_URL) throw new Error("No backend yet");
+    // if (!BACKEND_URL) throw new Error("No backend yet");
     const res = await fetch(`${BACKEND_URL}/ideas`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -285,7 +426,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   async function askBackendAssistant(question) {
-    if (!BACKEND_URL) throw new Error("No backend configured");
+    // if (!BACKEND_URL) throw new Error("No backend configured");
     const res = await fetch(`${BACKEND_URL}/assistant`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },

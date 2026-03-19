@@ -1,6 +1,6 @@
 /**
- * Lightweight Particle Network Animation
- * Creates a canvas-based network of connected particles.
+ * Classical Floating Particles Animation
+ * Creates an elegant, premium bokeh floating effect
  */
 
 const initParticles = (containerId) => {
@@ -15,13 +15,12 @@ const initParticles = (containerId) => {
     canvas.style.width = "100%";
     canvas.style.height = "100%";
     canvas.style.zIndex = "-1";
+    canvas.style.pointerEvents = "none";
     container.appendChild(canvas);
 
     const ctx = canvas.getContext("2d");
     let particles = [];
     const particleCount = window.innerWidth < 768 ? 40 : 80;
-    const connectionDistance = 150;
-    const mouseDistance = 200;
 
     let width, height;
 
@@ -33,90 +32,106 @@ const initParticles = (containerId) => {
     window.addEventListener("resize", resize);
     resize();
 
-    // Mouse tracking
-    const mouse = { x: null, y: null };
+    // Mouse tracking (gentle parallax)
+    const mouse = { x: width / 2, y: height / 2, targetX: width / 2, targetY: height / 2 };
     window.addEventListener("mousemove", (e) => {
-        mouse.x = e.clientX;
-        mouse.y = e.clientY;
-    });
-    window.addEventListener("mouseleave", () => {
-        mouse.x = null;
-        mouse.y = null;
+        mouse.targetX = e.clientX;
+        mouse.targetY = e.clientY;
     });
 
-    // Particle Class
+    // Premium color palette (champagne, soft silver, slate blue)
+    const colors = [
+        { r: 238, g: 216, b: 161 },   // Soft Gold/Champagne
+        { r: 215, g: 215, b: 220 },   // Silver/White
+        { r: 156, g: 175, b: 200 },   // Slate Blue
+        { r: 250, g: 245, b: 235 }    // Warm White
+    ];
+
+    const getGradientColor = (alpha = 0.5) => {
+        const colorIndex = Math.floor(Math.random() * colors.length);
+        const color = colors[colorIndex];
+        return `rgba(${color.r}, ${color.g}, ${color.b}, ${alpha})`;
+    };
+
     class Particle {
         constructor() {
             this.x = Math.random() * width;
             this.y = Math.random() * height;
-            this.vx = (Math.random() - 0.5) * 0.5;
-            this.vy = (Math.random() - 0.5) * 0.5;
-            this.size = Math.random() * 2 + 1;
-            this.color = `rgba(0, 122, 255, ${Math.random() * 0.5 + 0.2})`; // Blueish
+            // Very slow drift upwards
+            this.vx = (Math.random() - 0.5) * 0.15;
+            this.vy = (Math.random() - 0.5) * 0.2 - 0.1;
+            // Varying sizes for depth (bokeh effect)
+            this.size = Math.random() * Math.random() * 20 + 2;
+            
+            // Opacity based on size (smaller = further = dimmer)
+            const baseAlpha = this.size < 4 ? 0.2 : (this.size < 12 ? 0.4 : 0.6);
+            this.color = getGradientColor(baseAlpha * (Math.random() * 0.5 + 0.5));
+            this.blur = this.size > 8 ? this.size * 0.4 : 0;
+            this.sway = Math.random() * Math.PI * 2;
+            this.swaySpeed = Math.random() * 0.008 + 0.002;
+            this.depth = Math.random() * 0.5 + 0.1;
         }
 
         update() {
-            this.x += this.vx;
+            // Gentle swaying motion
+            this.sway += this.swaySpeed;
+            this.x += this.vx + Math.sin(this.sway) * 0.15;
             this.y += this.vy;
 
-            // Bounce off edges
-            if (this.x < 0 || this.x > width) this.vx *= -1;
-            if (this.y < 0 || this.y > height) this.vy *= -1;
+            // Parallax effect from mouse
+            const dx = (mouse.x - width / 2) * 0.001 * this.depth;
+            const dy = (mouse.y - height / 2) * 0.001 * this.depth;
+            this.x -= dx;
+            this.y -= dy;
 
-            // Mouse interaction
-            if (mouse.x != null) {
-                let dx = mouse.x - this.x;
-                let dy = mouse.y - this.y;
-                let distance = Math.sqrt(dx * dx + dy * dy);
-                if (distance < mouseDistance) {
-                    const forceDirectionX = dx / distance;
-                    const forceDirectionY = dy / distance;
-                    const force = (mouseDistance - distance) / mouseDistance;
-                    const directionX = forceDirectionX * force * this.size;
-                    const directionY = forceDirectionY * force * this.size;
-                    this.x -= directionX * 0.6; // Move away from mouse
-                    this.y -= directionY * 0.6;
-                }
+            // Wrap around edges softly
+            if (this.x < -30) this.x = width + 30;
+            if (this.x > width + 30) this.x = -30;
+            if (this.y < -30) {
+                this.y = height + 30;
+                this.x = Math.random() * width;
+            }
+            if (this.y > height + 30) {
+                this.y = -30;
+                this.x = Math.random() * width;
             }
         }
 
         draw() {
+            ctx.save();
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
             ctx.fillStyle = this.color;
+            
+            if (this.blur > 0) {
+                ctx.shadowBlur = this.blur;
+                ctx.shadowColor = this.color;
+            }
+            
             ctx.fill();
+            ctx.restore();
         }
     }
 
-    // Initialize particles
     for (let i = 0; i < particleCount; i++) {
         particles.push(new Particle());
     }
 
-    // Animation Loop
     const animate = () => {
-        ctx.clearRect(0, 0, width, height);
+        // Smoothly interpolate mouse position
+        mouse.x += (mouse.targetX - mouse.x) * 0.05;
+        mouse.y += (mouse.targetY - mouse.y) * 0.05;
 
-        for (let i = 0; i < particles.length; i++) {
-            particles[i].update();
-            particles[i].draw();
+        // Clear with slight trail effect
+        // Using a very deep, rich dark color for premium feel
+        ctx.fillStyle = 'rgba(5, 5, 8, 0.4)';
+        ctx.fillRect(0, 0, width, height);
 
-            // Draw connections
-            for (let j = i; j < particles.length; j++) {
-                let dx = particles[i].x - particles[j].x;
-                let dy = particles[i].y - particles[j].y;
-                let distance = Math.sqrt(dx * dx + dy * dy);
+        particles.forEach(particle => {
+            particle.update();
+            particle.draw();
+        });
 
-                if (distance < connectionDistance) {
-                    ctx.beginPath();
-                    ctx.strokeStyle = `rgba(0, 122, 255, ${1 - distance / connectionDistance})`;
-                    ctx.lineWidth = 1;
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.stroke();
-                }
-            }
-        }
         requestAnimationFrame(animate);
     };
 

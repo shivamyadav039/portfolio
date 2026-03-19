@@ -78,7 +78,11 @@ If question is outside this scope, reply:
 });
 
 // ========== START SERVER ==========
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log("Shivam portfolio backend listening on port", PORT);
-});
+if (!process.env.VERCEL) {
+  const PORT = process.env.PORT || 8080;
+  app.listen(PORT, () => {
+    console.log("Shivam portfolio backend listening on port", PORT);
+  });
+}
+
+module.exports = app;

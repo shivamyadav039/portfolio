@@ -1,0 +1,634 @@
+/* ===================================================
+   SECTION PAGE OVERLAY SYSTEM
+   Full-screen immersive pages per section
+   =================================================== */
+
+/* ===== SECTION TRIGGER BUTTONS ===== */
+.nav-link {
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #007aff, #00d4ff);
+    transition: width 0.3s ease;
+    border-radius: 2px;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* ===== SECTION OVERLAY WRAPPER ===== */
+.section-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.section-overlay.open {
+    pointer-events: all;
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ===== OVERLAY BACKGROUND (animated gradient per section) ===== */
+.section-overlay-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    transition: opacity 0.7s ease;
+}
+
+/* About – deep ocean blue */
+.section-overlay[data-section="about"] .section-overlay-bg {
+    background:
+        radial-gradient(ellipse at 20% 20%, rgba(0, 122, 255, 0.35) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(0, 212, 255, 0.25) 0%, transparent 50%),
+        linear-gradient(135deg, #020818 0%, #060d1f 60%, #000d1a 100%);
+}
+
+/* Projects – electric violet */
+.section-overlay[data-section="projects"] .section-overlay-bg {
+    background:
+        radial-gradient(ellipse at 15% 30%, rgba(139, 92, 246, 0.35) 0%, transparent 50%),
+        radial-gradient(ellipse at 85% 70%, rgba(79, 70, 229, 0.25) 0%, transparent 50%),
+        linear-gradient(135deg, #08021f 0%, #100828 60%, #050015 100%);
+}
+
+/* Skills – emerald green */
+.section-overlay[data-section="skills"] .section-overlay-bg {
+    background:
+        radial-gradient(ellipse at 25% 40%, rgba(16, 185, 129, 0.35) 0%, transparent 50%),
+        radial-gradient(ellipse at 75% 60%, rgba(5, 150, 105, 0.25) 0%, transparent 50%),
+        linear-gradient(135deg, #011f14 0%, #011a0f 60%, #00100a 100%);
+}
+
+/* Experience – amber gold */
+.section-overlay[data-section="experience"] .section-overlay-bg {
+    background:
+        radial-gradient(ellipse at 30% 25%, rgba(245, 158, 11, 0.30) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 75%, rgba(217, 119, 6, 0.22) 0%, transparent 50%),
+        linear-gradient(135deg, #1a0f00 0%, #150a00 60%, #0d0600 100%);
+}
+
+/* Contact – cyan */
+.section-overlay[data-section="contact"] .section-overlay-bg {
+    background:
+        radial-gradient(ellipse at 20% 50%, rgba(6, 182, 212, 0.35) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 50%, rgba(14, 165, 233, 0.25) 0%, transparent 50%),
+        linear-gradient(135deg, #001520 0%, #000e18 60%, #000812 100%);
+}
+
+/* ===== FLOATING PARTICLE CANVAS ===== */
+.section-overlay-canvas {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* ===== FLOATING ICON ELEMENTS ===== */
+.floating-icon {
+    position: absolute;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0;
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.08);
+    user-select: none;
+    transition: opacity 0.6s ease;
+    will-change: transform;
+}
+
+.section-overlay.open .floating-icon {
+    opacity: 1;
+}
+
+@keyframes floatOrbit1 {
+
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+    }
+
+    25% {
+        transform: translate(30px, -40px) rotate(90deg) scale(1.1);
+    }
+
+    50% {
+        transform: translate(-20px, -80px) rotate(180deg) scale(0.9);
+    }
+
+    75% {
+        transform: translate(-40px, -30px) rotate(270deg) scale(1.05);
+    }
+}
+
+@keyframes floatOrbit2 {
+
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    33% {
+        transform: translate(-50px, 30px) rotate(120deg);
+    }
+
+    66% {
+        transform: translate(40px, 60px) rotate(240deg);
+    }
+}
+
+@keyframes floatOrbit3 {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+
+    50% {
+        transform: translate(60px, -50px) scale(1.15) rotate(180deg);
+    }
+}
+
+@keyframes floatDrift {
+
+    0%,
+    100% {
+        transform: translateY(0px) translateX(0px);
+    }
+
+    50% {
+        transform: translateY(-25px) translateX(15px);
+    }
+}
+
+@keyframes floatBounce {
+
+    0%,
+    100% {
+        transform: translateY(0px) scale(1);
+    }
+
+    50% {
+        transform: translateY(-35px) scale(1.08);
+    }
+}
+
+@keyframes pulsateGlow {
+
+    0%,
+    100% {
+        opacity: 0.06;
+        filter: blur(0px);
+    }
+
+    50% {
+        opacity: 0.15;
+        filter: blur(2px);
+    }
+}
+
+/* ===== ANIMATED GRID LINES ===== */
+.overlay-grid {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridMove 20s linear infinite;
+    opacity: 0;
+    transition: opacity 0.8s ease 0.3s;
+}
+
+.section-overlay.open .overlay-grid {
+    opacity: 1;
+}
+
+@keyframes gridMove {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 60px 60px;
+    }
+}
+
+/* ===== OVERLAY CLOSE BUTTON ===== */
+.overlay-close-btn {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 310;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #fff;
+    font-size: 1.2rem;
+    transition: all 0.25s ease;
+    transform: scale(0) rotate(-90deg);
+    opacity: 0;
+}
+
+.section-overlay.open .overlay-close-btn {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s,
+        opacity 0.3s ease 0.3s,
+        background 0.2s ease;
+}
+
+.overlay-close-btn:hover {
+    background: rgba(255, 80, 80, 0.3);
+    border-color: rgba(255, 80, 80, 0.5);
+    transform: scale(1.1) rotate(90deg) !important;
+}
+
+/* ===== OVERLAY CONTENT PANEL ===== */
+.overlay-content-panel {
+    position: relative;
+    z-index: 300;
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 122, 255, 0.5) transparent;
+    padding: 5rem 2rem 3rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.overlay-content-panel::-webkit-scrollbar {
+    width: 4px;
+}
+
+.overlay-content-panel::-webkit-scrollbar-thumb {
+    background: rgba(0, 122, 255, 0.5);
+    border-radius: 4px;
+}
+
+/* ===== SECTION ENTER ANIMATION ===== */
+
+/* Overlay enter: curtain wipe from bottom */
+.section-overlay {
+    clip-path: inset(100% 0 0 0);
+    transition:
+        clip-path 0.65s cubic-bezier(0.76, 0, 0.24, 1),
+        opacity 0.1s ease,
+        visibility 0s linear 0.65s;
+}
+
+.section-overlay.open {
+    clip-path: inset(0% 0 0 0);
+    transition:
+        clip-path 0.65s cubic-bezier(0.76, 0, 0.24, 1),
+        opacity 0.1s ease,
+        visibility 0s linear 0s;
+}
+
+.section-overlay.closing {
+    clip-path: inset(0% 0 100% 0) !important;
+    transition: clip-path 0.55s cubic-bezier(0.76, 0, 0.24, 1) !important;
+}
+
+/* ===== CONTENT STAGGER FLY-IN ===== */
+.overlay-section-content {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.section-overlay.open .overlay-section-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger children */
+.overlay-section-content:nth-child(1) {
+    transition-delay: 0.2s;
+}
+
+.overlay-section-content:nth-child(2) {
+    transition-delay: 0.35s;
+}
+
+.overlay-section-content:nth-child(3) {
+    transition-delay: 0.5s;
+}
+
+.overlay-section-content:nth-child(4) {
+    transition-delay: 0.65s;
+}
+
+.overlay-section-content:nth-child(5) {
+    transition-delay: 0.8s;
+}
+
+/* ===== OVERLAY TITLE ===== */
+.overlay-page-title {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #ffffff 30%, rgba(255, 255, 255, 0.5) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
+
+.overlay-page-subtitle {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.45);
+    margin-bottom: 3rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+/* ===== GLASS CARDS IN OVERLAYS ===== */
+.overlay-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1.25rem;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 1.75rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.overlay-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 1.25rem;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.overlay-card:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+/* ===== SECTION-SPECIFIC ACCENT COLORS ===== */
+
+/* About – blue */
+.section-overlay[data-section="about"] .overlay-accent {
+    color: #60a5fa;
+}
+
+.section-overlay[data-section="about"] .overlay-accent-border {
+    border-color: rgba(96, 165, 250, 0.3);
+}
+
+.section-overlay[data-section="about"] .overlay-card:hover {
+    border-color: rgba(96, 165, 250, 0.3);
+    box-shadow: 0 20px 60px rgba(0, 122, 255, 0.15);
+}
+
+/* Projects – violet */
+.section-overlay[data-section="projects"] .overlay-accent {
+    color: #c084fc;
+}
+
+.section-overlay[data-section="projects"] .overlay-card:hover {
+    border-color: rgba(192, 132, 252, 0.3);
+    box-shadow: 0 20px 60px rgba(139, 92, 246, 0.15);
+}
+
+/* Skills – emerald */
+.section-overlay[data-section="skills"] .overlay-accent {
+    color: #34d399;
+}
+
+.section-overlay[data-section="skills"] .overlay-card:hover {
+    border-color: rgba(52, 211, 153, 0.3);
+    box-shadow: 0 20px 60px rgba(16, 185, 129, 0.15);
+}
+
+/* Experience – amber */
+.section-overlay[data-section="experience"] .overlay-accent {
+    color: #fbbf24;
+}
+
+.section-overlay[data-section="experience"] .overlay-card:hover {
+    border-color: rgba(251, 191, 36, 0.3);
+    box-shadow: 0 20px 60px rgba(245, 158, 11, 0.15);
+}
+
+/* Contact – cyan */
+.section-overlay[data-section="contact"] .overlay-accent {
+    color: #22d3ee;
+}
+
+.section-overlay[data-section="contact"] .overlay-card:hover {
+    border-color: rgba(34, 211, 238, 0.3);
+    box-shadow: 0 20px 60px rgba(6, 182, 212, 0.15);
+}
+
+/* ===== SKILL PILL PROGRESS BAR ===== */
+.skill-pill {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.skill-pill-bar {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 99px;
+    overflow: hidden;
+}
+
+.skill-pill-fill {
+    height: 100%;
+    border-radius: 99px;
+    width: 0%;
+    transition: width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ===== TIMELINE OVERLAY ===== */
+.overlay-timeline {
+    position: relative;
+    padding-left: 2rem;
+}
+
+.overlay-timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), transparent);
+    border-radius: 2px;
+}
+
+.overlay-timeline-item {
+    position: relative;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.section-overlay.open .overlay-timeline-item:nth-child(1) {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.4s;
+}
+
+.section-overlay.open .overlay-timeline-item:nth-child(2) {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.6s;
+}
+
+.section-overlay.open .overlay-timeline-item:nth-child(3) {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.8s;
+}
+
+.overlay-timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2.55rem;
+    top: 0.4rem;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: currentColor;
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1), 0 0 12px currentColor;
+}
+
+/* ===== PROJECT CARD IN OVERLAY ===== */
+.overlay-project-card {
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.overlay-project-card:hover {
+    transform: translateY(-8px) scale(1.01);
+}
+
+/* ===== CONTACT FORM IN OVERLAY ===== */
+.overlay-input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.75rem;
+    padding: 0.9rem 1.2rem;
+    color: #fff;
+    font-size: 0.9rem;
+    outline: none;
+    transition: all 0.25s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.overlay-input:focus {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(34, 211, 238, 0.5);
+    box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.15);
+}
+
+.overlay-input::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* ===== ORB BLOBS (floating BG blobs) ===== */
+.overlay-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.25;
+    animation: orbDrift 8s ease-in-out infinite;
+}
+
+@keyframes orbDrift {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    33% {
+        transform: translate(50px, -30px) scale(1.1);
+    }
+
+    66% {
+        transform: translate(-30px, 40px) scale(0.9);
+    }
+}
+
+/* ===== NAV OPEN INDICATOR ===== */
+.section-overlay .overlay-nav-indicator {
+    position: fixed;
+    top: 50%;
+    right: 1.5rem;
+    transform: translateY(-50%);
+    z-index: 310;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.overlay-nav-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.25);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.overlay-nav-dot.active {
+    background: #fff;
+    transform: scale(1.4);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 640px) {
+    .overlay-content-panel {
+        padding: 4rem 1.25rem 2rem;
+    }
+
+    .overlay-page-title {
+        font-size: 2.2rem;
+    }
+}

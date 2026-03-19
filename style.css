@@ -1,8 +1,8 @@
 /* ===== Global Styles ===== */
 body {
   font-family: "Poppins", sans-serif;
-  background-color: #0a0a0a;
-  color: #e0e0e0;
+  background-color: #030305;
+  color: #d1d5db;
   overflow-x: hidden;
   line-height: 1.6;
 }
@@ -30,13 +30,14 @@ body {
   background-color: #111827;
 }
 
-/* Glass Effect */
+/* Premium Glass Effect */
 .glass-effect {
-  background: rgba(15, 23, 42, 0.65);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  background: rgba(15, 15, 20, 0.4);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
 }
 
 /* Navbar Scrolled */
@@ -45,12 +46,12 @@ header {
 }
 
 header.scrolled {
-  background: rgba(10, 10, 10, 0.85);
-  backdrop-filter: blur(20px);
+  background: rgba(10, 10, 12, 0.7);
+  backdrop-filter: blur(24px);
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 /* Cards */
@@ -58,30 +59,429 @@ header.scrolled {
   @apply glass-effect rounded-xl px-4 py-3;
 }
 
-/* Hero Background */
-.hero-bg {
+/* ======= HERO BACKGROUND – premium ======= */
+.hero-bg-new {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle at 25% 30%, rgba(0, 122, 255, 0.16), transparent 45%),
-    radial-gradient(circle at 75% 70%, rgba(45, 212, 191, 0.15), transparent 50%);
-  opacity: 0.9;
   z-index: -1;
-  animation: heroPulse 15s infinite ease-in-out;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 50%, #0d0d14 0%, #030305 100%);
+}
+
+.hero-bg-new::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 40%, rgba(139, 115, 85, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 60%, rgba(70, 80, 110, 0.08) 0%, transparent 50%);
+  animation: heroBgPulse 20s ease-in-out infinite alternate;
+}
+
+.hero-bg-new::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: bgGridDrift 40s linear infinite;
+  opacity: 0.3;
+}
+
+@keyframes heroBgPulse {
+  0% { opacity: 0.8; transform: scale(1); }
+  100% { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes bgGridDrift {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 80px 80px;
+  }
+}
+
+/* Hero Canvas (particles) */
+.hero-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Keep old hero-bg for backward compat */
+.hero-bg {
+  display: none;
+}
+
+/* ======= HERO BADGE ======= */
+.hero-badge {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* ======= DOMAIN TAGS ======= */
+.hero-domain-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e2e8f0;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.25s ease;
+  cursor: default;
+}
+
+.hero-domain-tag:hover {
+  background: rgba(0, 122, 255, 0.15);
+  border-color: rgba(0, 122, 255, 0.45);
+  color: #93c5fd;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 122, 255, 0.2);
+}
+
+/* ======= HERO STAT CARDS ======= */
+.hero-stat-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  padding: 0.75rem 1rem;
+  text-align: center;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.25s ease;
+}
+
+.hero-stat-card:hover {
+  background: rgba(0, 122, 255, 0.1);
+  border-color: rgba(0, 122, 255, 0.3);
+  transform: translateY(-3px);
+}
+
+.hero-stat-num {
+  font-size: 1.4rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #eed8a1, #c8ab68);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+}
+
+.hero-stat-label {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.45);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 0.2rem;
+}
+
+/* ======= HERO BUTTONS ======= */
+.hero-btn-primary {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  color: #f8fafc;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.85rem 1.8rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  letter-spacing: 0.5px;
+}
+
+.hero-btn-primary:hover {
+  background: linear-gradient(135deg, #334155, #1e293b);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+.hero-btn-ghost {
+  color: #e2e8f0;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.04);
+  text-decoration: none;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.hero-btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+/* ======= PROFILE CARD ======= */
+.profile-wrapper {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 640px) {
+  .profile-wrapper {
+    width: 240px;
+    height: 240px;
+  }
+}
+
+/* Outer ring – slow spin */
+.profile-ring-outer {
+  position: absolute;
+  inset: -20px;
+  border-radius: 50%;
+  border: 2px dashed rgba(0, 122, 255, 0.25);
+  animation: profileRingOuter 18s linear infinite;
+}
+
+@keyframes profileRingOuter {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Inner ring – faster counter spin */
+.profile-ring-inner {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background: linear-gradient(#0a0a0a, #0a0a0a) padding-box,
+    linear-gradient(135deg, #007aff, #a78bfa, #22d3ee, #007aff) border-box;
+  animation: profileRingInner 6s linear infinite;
+}
+
+@keyframes profileRingInner {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+/* Photo frame */
+.profile-photo-frame {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  box-shadow:
+    0 0 0 4px rgba(255, 255, 255, 0.06),
+    0 0 60px rgba(0, 122, 255, 0.3),
+    0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.profile-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 0.6s ease, filter 0.6s ease;
+}
+
+.profile-wrapper:hover .profile-photo {
+  transform: scale(1.06);
+  filter: brightness(1.08) saturate(1.1);
+}
+
+/* Shimmer sweep on hover */
+.profile-shimmer {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: linear-gradient(120deg,
+      transparent 20%,
+      rgba(255, 255, 255, 0.12) 50%,
+      transparent 80%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.profile-wrapper:hover .profile-shimmer {
+  opacity: 1;
+  animation: shimmerSweep 1.2s ease-in-out;
+}
+
+@keyframes shimmerSweep {
+  from {
+    transform: translateX(-100%) skewX(-20deg);
+    opacity: 0;
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  to {
+    transform: translateX(200%) skewX(-20deg);
+    opacity: 0;
+  }
+}
+
+/* Glow blob */
+.profile-glow {
+  position: absolute;
+  inset: -30px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 122, 255, 0.25) 0%, transparent 70%);
+  filter: blur(20px);
+  z-index: -1;
+  animation: profileGlowPulse 4s ease-in-out infinite;
+}
+
+@keyframes profileGlowPulse {
+
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+/* Floating badges on profile */
+.profile-badge {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(10, 12, 28, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e2e8f0;
+  white-space: nowrap;
+  z-index: 10;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  animation: profileBadgeFloat 5s ease-in-out infinite;
+}
+
+.profile-badge-top {
+  top: -16px;
+  right: -20px;
+  border-color: rgba(52, 211, 153, 0.4);
+  animation-delay: 0s;
+}
+
+.profile-badge-bottom {
+  bottom: -16px;
+  left: -20px;
+  border-color: rgba(0, 122, 255, 0.4);
+  animation-delay: 1.5s;
+}
+
+.profile-badge-left {
+  top: 50%;
+  left: -55px;
+  transform: translateY(-50%);
+  border-color: rgba(168, 85, 247, 0.4);
+  animation-delay: 0.75s;
+}
+
+@keyframes profileBadgeFloat {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.profile-badge-left {
+  animation: profileBadgeLeftFloat 5s ease-in-out infinite 0.75s;
+}
+
+@keyframes profileBadgeLeftFloat {
+
+  0%,
+  100% {
+    transform: translateY(-50%) translateX(0);
+  }
+
+  50% {
+    transform: translateY(-50%) translateX(-4px);
+  }
+}
+
+.badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+  animation: badgeDotPulse 2s ease-in-out infinite;
+}
+
+@keyframes badgeDotPulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
 }
 
 @keyframes heroPulse {
 
   0%,
   100% {
-    transform: scale(1);
-    opacity: 0.9;
+    transform: scale(1) rotate(0deg);
+    opacity: 0.95;
   }
 
-  50% {
-    transform: scale(1.06);
+  33% {
+    transform: scale(1.08) rotate(1deg);
     opacity: 1;
   }
+
+  66% {
+    transform: scale(1.05) rotate(-1deg);
+    opacity: 0.98;
+  }
 }
+
 
 /* Section Reveal Animation */
 .section-reveal {
