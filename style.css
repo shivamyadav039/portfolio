@@ -234,8 +234,8 @@ header.scrolled {
 /* ======= PROFILE CARD ======= */
 .profile-wrapper {
   position: relative;
-  width: 300px;
-  height: 300px;
+  width: 320px;
+  height: 420px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -243,56 +243,39 @@ header.scrolled {
 
 @media (max-width: 640px) {
   .profile-wrapper {
-    width: 240px;
-    height: 240px;
+    width: 260px;
+    height: 340px;
   }
 }
 
-/* Outer ring – slow spin */
+/* Outer ring – removed for rectangular portrait */
 .profile-ring-outer {
-  position: absolute;
-  inset: -20px;
-  border-radius: 50%;
-  border: 2px dashed rgba(0, 122, 255, 0.25);
-  animation: profileRingOuter 18s linear infinite;
+  display: none;
 }
 
-@keyframes profileRingOuter {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* Inner ring – faster counter spin */
+/* Inner ring – glowing animated gradient border */
 .profile-ring-inner {
   position: absolute;
   inset: -8px;
-  border-radius: 50%;
+  border-radius: 32px;
   border: 2px solid transparent;
   background: linear-gradient(#0a0a0a, #0a0a0a) padding-box,
     linear-gradient(135deg, #007aff, #a78bfa, #22d3ee, #007aff) border-box;
-  animation: profileRingInner 6s linear infinite;
+  background-size: 200% 200%;
+  animation: profileGradientShift 4s ease infinite;
 }
 
-@keyframes profileRingInner {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(-360deg);
-  }
+@keyframes profileGradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* Photo frame */
 .profile-photo-frame {
   width: 100%;
   height: 100%;
-  border-radius: 50%;
+  border-radius: 24px;
   overflow: hidden;
   position: relative;
   box-shadow:
@@ -310,7 +293,7 @@ header.scrolled {
 }
 
 .profile-wrapper:hover .profile-photo {
-  transform: scale(1.06);
+  transform: scale(1.04);
   filter: brightness(1.08) saturate(1.1);
 }
 
@@ -318,7 +301,7 @@ header.scrolled {
 .profile-shimmer {
   position: absolute;
   inset: 0;
-  border-radius: 50%;
+  border-radius: 24px;
   background: linear-gradient(120deg,
       transparent 20%,
       rgba(255, 255, 255, 0.12) 50%,
@@ -352,10 +335,10 @@ header.scrolled {
 /* Glow blob */
 .profile-glow {
   position: absolute;
-  inset: -30px;
-  border-radius: 50%;
+  inset: -20px;
+  border-radius: 32px;
   background: radial-gradient(circle, rgba(0, 122, 255, 0.25) 0%, transparent 70%);
-  filter: blur(20px);
+  filter: blur(30px);
   z-index: -1;
   animation: profileGlowPulse 4s ease-in-out infinite;
 }
@@ -370,7 +353,7 @@ header.scrolled {
 
   50% {
     opacity: 1;
-    transform: scale(1.1);
+    transform: scale(1.05);
   }
 }
 
